@@ -1,7 +1,7 @@
 services:
   fastapi:
     public: true
-    image: snehilk31/website:latest
+    image: snehilk31/Website:latest
     build: .
     replicas: 1
     ports:
