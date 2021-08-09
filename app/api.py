@@ -28,8 +28,16 @@ def get_db():
 async def welcome(request: Request, db: Session=Depends(get_db)):
     x = crud.get_salary(db)
     df= pd.DataFrame.from_records(x,columns=['Player','Position','Team','Salary'])
+
+    px.defaults.width = 266
+    px.defaults.height = 200
+
     df10=df.head(10)
     fig= px.bar(df10,x='Player', y='Salary', title= 'Top 10 paid NFL players')
+    fig.update_layout( yaxis = dict( tickfont = dict(size=5)),
+    xaxis = dict( tickfont = dict(size=5)),
+    font=dict(size=5),
+    margin=dict(l=0, r=0, t=0, b=0))
     top10=fig.to_html(full_html=False, include_plotlyjs='cdn')
 
     dfteam=df.groupby('Team')['Salary'].sum()
