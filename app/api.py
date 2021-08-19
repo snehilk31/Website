@@ -32,6 +32,7 @@ async def welcome(request: Request, db: Session=Depends(get_db)):
     px.defaults.width = 266
     px.defaults.height = 200
 
+    fig = px.bar(df.head(10),x='Player', y='Salary', color='Position').update_xaxes(categoryorder="total descending")
     df10=df.head(10)
     fig= px.bar(df10,x='Player', y='Salary', title= 'Top 10 paid NFL players')
     fig.update_layout( yaxis = dict( tickfont = dict(size=5)),
